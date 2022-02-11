@@ -20,21 +20,20 @@ At this point, when running 'composer test', all tests should pass.
 
 NOTES
 -----
-- Test admin user is seeded with the following:<br>
+Test admin user is seeded with the following:
 ```
 Name: admin
 Email: admin@test.com
 Password: password
 ```
-- Test vehicles are seeded<br>
-- API auth via laravel's Sanctum: https://laravel.com/docs/9.x/sanctum <br>
-- Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting <br>
-- Refer to /tests/Feature for example usage<br>
+- Test vehicles are seeded
+- API auth via laravel's Sanctum: https://laravel.com/docs/9.x/sanctum 
+- Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting 
+- Refer to /tests/Feature for example usage
 - Edit .env 'VEHICLE_CONDITION' to restrict type: any/new/used
-- 
-- Use /api/register to create new user (will also provide bearer token)<br>
-- Or use /api/login for existing user to get bearer token<br>
-- CRUD Endpoints (Swagger docs coming soon):<br>
+- Use /api/register to create new user (will also provide bearer token)
+- Or use /api/login for existing user to get bearer token
+- CRUD Endpoints (Swagger docs coming soon):
 ```
 GET - Get one vehicle: /api/vehicles/{id}
 GET - Get all vehicles: /api/vehicles
