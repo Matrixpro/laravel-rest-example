@@ -29,4 +29,24 @@ Password: password
 - API auth via laravel's Sanctum: https://laravel.com/docs/9.x/sanctum <br>
 - Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting <br>
 - Refer to /tests/Feature for example usage<br>
+- Edit .env 'VEHICLE_CONDITION' to restrict type: any/new/used
+- Use /api/register to create new user (will also provide bearer token)<br>
+- Or use /api/login for existing user to get bearer token<br>
+- CRUD Endpoints (Swagger docs coming soon):<br>
+```
+GET - Get one vehicle: /api/vehicles/{id}
+GET - Get all vehicles: /api/vehicles
+POST - Create a vehicle: /api/vehicles
+PUT - Put a vehicle: /api/vehicles/{id}
+PATCH - Patch a vehicle: /api/vehicles/{id}
+DELETE - Delete one vehicle: /api/vehicles/{id}
+```
+Optional params for GET All:
+```
+per_page (int)
+order_by (enum: type, msrp, make, year, model, miles, vin, created_at, updated_at, id)
+order_direction (enum: ASC, DESC)
+search_in (same values as order_by)
+search_for (str)
+```
 

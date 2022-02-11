@@ -36,6 +36,15 @@ class VehicleController extends BaseController
         $order_direction = request('order_direction', 'ASC');
         
         $paginator = Vehicle::orderBy($order_by, $order_direction);
+        
+        switch (env('VEHICLE_CONDITION')) {
+            case 'new':
+                $paginator->where('type', 'LIKE', 'new');
+                break;
+            case 'used':
+                $paginator->where('type', 'LIKE', 'used');
+                break;
+        }
 
         if (!is_null($search_for) && !is_null($search_in))
             $paginator->where($search_in, 'LIKE', '%'.$search_for.'%');
