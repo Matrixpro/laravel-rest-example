@@ -11,11 +11,12 @@ B) Run commands:<br>
 ```
 composer install
 npm install
-npm run-dev
+npm run dev
 php artisan migrate
 php artisan db:seed
-
+composer test
 ```
+At this point, when running 'composer test', all tests should pass.
 
 NOTES
 -----
@@ -30,6 +31,7 @@ Password: password
 - Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting <br>
 - Refer to /tests/Feature for example usage<br>
 - Edit .env 'VEHICLE_CONDITION' to restrict type: any/new/used
+- 
 - Use /api/register to create new user (will also provide bearer token)<br>
 - Or use /api/login for existing user to get bearer token<br>
 - CRUD Endpoints (Swagger docs coming soon):<br>
