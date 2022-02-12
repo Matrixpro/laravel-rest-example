@@ -21,9 +21,9 @@ class ApiLoginTest extends TestCase
     }
     
     
-    public function testUserLoginsSuccessfully()
+    public function test_user_logins_successfully()
     {
-        // User should be available from seed:
+        // User from seed:
         
         $user = User::first();
         
