@@ -8,37 +8,21 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use Validator;
 
+/**
+ * @group Auth
+ * 
+ * Login or register for a new account to get your auth token
+ */
 class AuthController extends BaseController
 {
-
     /**
-     * API Login
+     * @unauthenticated API Register
+     *
+     * @bodyParam name string required Your name. Example: Jack Black
+     * @bodyParam email string required Your email. Example: jack@example.com
+     * @bodyParam password string required Your password. Example: password
+     * @bodyParam confirm_password string required Confirm your password. Example: password
      * 
-     * Login via API
-     *
-     * @param      \Illuminate\Http\Request  $request  The request
-     *
-     * @return     <JSON>                    ( API Bearer Token + Name )
-     */
-    public function login(Request $request)
-    {
-        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->password])) { 
-            $auth = Auth::user(); 
-            
-            $success['token'] =  $auth->createToken('LaravelSanctumAuth')->plainTextToken; 
-            $success['name'] =  $auth->name;
-   
-            return $this->handleResponse($success, 'User logged in.');
-        }
-        
-        return $this->handleError('Unauthorised.', ['error'=>'Unauthorised']);
-    }
-
-    /**
-     * API Register
-     * 
-     * Register new user via API
-     *
      * @param      \Illuminate\Http\Request  $request  The request
      *
      * @return     <JSON>                    ( API Bearer Token + Name )
@@ -64,6 +48,31 @@ class AuthController extends BaseController
         $success['name'] =  $user->name;
    
         return $this->handleResponse($success, 'User registered.');
+    }
+    
+    
+    /**
+     * API Login
+     * 
+     * @bodyParam name string required Your name. Example: Jack Black
+     * @bodyParam email string required Your email. Example: jack@example.com
+     *
+     * @param      \Illuminate\Http\Request  $request  The request
+     *
+     * @return     <JSON>                    ( API Bearer Token + Name )
+     */
+    public function login(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->password])) { 
+            $auth = Auth::user(); 
+            
+            $success['token'] =  $auth->createToken('LaravelSanctumAuth')->plainTextToken; 
+            $success['name'] =  $auth->name;
+   
+            return $this->handleResponse($success, 'User logged in.');
+        }
+        
+        return $this->handleError('Unauthorised.', ['error'=>'Unauthorised']);
     }
    
 }

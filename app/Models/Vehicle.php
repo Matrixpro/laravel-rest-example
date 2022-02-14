@@ -19,6 +19,10 @@ class Vehicle extends Model {
 		'vin',
 	];
 	
+   protected $hidden = [
+   	'deleted_at'
+   ];
+	
 	public function getFillablesArr()
 	{
 		return $this->fillable;

@@ -1,0 +1,726 @@
+openapi: 3.0.3
+info:
+  title: 'Laravel REST API Example'
+  description: Documentation
+  version: 1.0.0
+servers:
+  -
+    url: 'http://rest.local'
+paths:
+  /api/login:
+    post:
+      summary: 'API Login'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Your name.'
+                  example: 'Jack Black'
+                email:
+                  type: string
+                  description: 'Your email.'
+                  example: jack@example.com
+              required:
+                - name
+                - email
+  /api/register:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Your name.'
+                  example: 'Jack Black'
+                email:
+                  type: string
+                  description: 'Your email.'
+                  example: jack@example.com
+                password:
+                  type: string
+                  description: 'Your password.'
+                  example: password
+                confirm_password:
+                  type: string
+                  description: 'Confirm your password.'
+                  example: password
+              required:
+                - name
+                - email
+                - password
+                - confirm_password
+      security: []
+  /api/vehicles:
+    get:
+      summary: 'List all vehicles'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 151
+                      type: new
+                      msrp: '5193.11'
+                      year: 2022
+                      make: Honda
+                      model: Accord
+                      miles: 43
+                      vin: '0'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 152
+                      type: used
+                      msrp: '87406.24'
+                      year: 2022
+                      make: Honda
+                      model: 'Accord Hybrid'
+                      miles: 71172
+                      vin: '33159538'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 153
+                      type: used
+                      msrp: '18393.45'
+                      year: 2022
+                      make: Honda
+                      model: Civic
+                      miles: 2805
+                      vin: '81815790'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 154
+                      type: used
+                      msrp: '20750.53'
+                      year: 2022
+                      make: Honda
+                      model: 'Civic Type R'
+                      miles: 68912829
+                      vin: '32'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 155
+                      type: used
+                      msrp: '47393.72'
+                      year: 2022
+                      make: Honda
+                      model: CR-V
+                      miles: 63162
+                      vin: '0'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 156
+                      type: used
+                      msrp: '7315.29'
+                      year: 2022
+                      make: Honda
+                      model: 'CR-V Hybrid'
+                      miles: 9452
+                      vin: '17'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 157
+                      type: new
+                      msrp: '72378.53'
+                      year: 2022
+                      make: Honda
+                      model: HR-V
+                      miles: 305465390
+                      vin: '9'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 158
+                      type: used
+                      msrp: '34724.91'
+                      year: 2022
+                      make: Honda
+                      model: Insight
+                      miles: 8939
+                      vin: '6'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 159
+                      type: used
+                      msrp: '59759.39'
+                      year: 2022
+                      make: Honda
+                      model: Odyssey
+                      miles: 897250015
+                      vin: '71'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                    -
+                      id: 160
+                      type: new
+                      msrp: '2172.39'
+                      year: 2022
+                      make: Honda
+                      model: Passport
+                      miles: 48634011
+                      vin: '614959'
+                      created_at: '2022-02-11T20:33:08.000000Z'
+                  path: 'http://rest.local/api/vehicles'
+                  per_page: 10
+                  next_page_url: 'http://rest.local/api/vehicles?cursor=eyJpZCI6MTYwLCJfcG9pbnRzVG9OZXh0SXRlbXMiOnRydWV9'
+                  prev_page_url: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 151
+                        type: new
+                        msrp: '5193.11'
+                        year: 2022
+                        make: Honda
+                        model: Accord
+                        miles: 43
+                        vin: '0'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 152
+                        type: used
+                        msrp: '87406.24'
+                        year: 2022
+                        make: Honda
+                        model: 'Accord Hybrid'
+                        miles: 71172
+                        vin: '33159538'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 153
+                        type: used
+                        msrp: '18393.45'
+                        year: 2022
+                        make: Honda
+                        model: Civic
+                        miles: 2805
+                        vin: '81815790'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 154
+                        type: used
+                        msrp: '20750.53'
+                        year: 2022
+                        make: Honda
+                        model: 'Civic Type R'
+                        miles: 68912829
+                        vin: '32'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 155
+                        type: used
+                        msrp: '47393.72'
+                        year: 2022
+                        make: Honda
+                        model: CR-V
+                        miles: 63162
+                        vin: '0'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 156
+                        type: used
+                        msrp: '7315.29'
+                        year: 2022
+                        make: Honda
+                        model: 'CR-V Hybrid'
+                        miles: 9452
+                        vin: '17'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 157
+                        type: new
+                        msrp: '72378.53'
+                        year: 2022
+                        make: Honda
+                        model: HR-V
+                        miles: 305465390
+                        vin: '9'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 158
+                        type: used
+                        msrp: '34724.91'
+                        year: 2022
+                        make: Honda
+                        model: Insight
+                        miles: 8939
+                        vin: '6'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 159
+                        type: used
+                        msrp: '59759.39'
+                        year: 2022
+                        make: Honda
+                        model: Odyssey
+                        miles: 897250015
+                        vin: '71'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                      -
+                        id: 160
+                        type: new
+                        msrp: '2172.39'
+                        year: 2022
+                        make: Honda
+                        model: Passport
+                        miles: 48634011
+                        vin: '614959'
+                        created_at: '2022-02-11T20:33:08.000000Z'
+                    items:
+                      type: object
+                  path:
+                    type: string
+                    example: 'http://rest.local/api/vehicles'
+                  per_page:
+                    type: integer
+                    example: 10
+                  next_page_url:
+                    type: string
+                    example: 'http://rest.local/api/vehicles?cursor=eyJpZCI6MTYwLCJfcG9pbnRzVG9OZXh0SXRlbXMiOnRydWV9'
+                  prev_page_url:
+                    type: string
+                    example: null
+      tags:
+        - Vehicles
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                per_page:
+                  type: integer
+                  description: ''
+                  example: 10
+                search_for:
+                  type: string
+                  description: 'Search term.'
+                  example: Honda
+                search_in:
+                  type: string
+                  description: 'Options: type, msrp, make, year, model, miles, vin, created_at, updated_at'
+                  example: make
+                order_direction:
+                  type: string
+                  description: 'Options: ASC and DESC'
+                  example: ASC
+    post:
+      summary: 'Create a vehicle'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Vehicles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'The condition of the vehicle.'
+                  example: new
+                msrp:
+                  type: numeric
+                  description: 'The MSRP of the vehicle.'
+                  example: '189000.99'
+                make:
+                  type: string
+                  description: 'The make of the vehicle.'
+                  example: Honda
+                year:
+                  type: integer
+                  description: 'The year of the vehicle.'
+                  example: 2022
+                model:
+                  type: string
+                  description: 'The model of the vehicle.'
+                  example: Accord
+                miles:
+                  type: string
+                  description: 'The miles of the vehicle.'
+                  example: '20000'
+                vin:
+                  type: string
+                  description: 'The VIN of the vehicle.'
+                  example: 4Y1SL65848Z411439
+              required:
+                - type
+                - msrp
+                - make
+                - year
+                - model
+                - miles
+                - vin
+  '/api/vehicles/{id}':
+    delete:
+      summary: 'Delete a vehicle'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Vehicles
+    get:
+      summary: 'Get a vehicle'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    created_at: '2022-02-11T20:33:07.000000Z'
+                    updated_at: '2022-02-11T20:33:07.000000Z'
+                    type: used
+                    msrp: '51353.38'
+                    year: 2022
+                    make: Acura
+                    model: ILX
+                    miles: 9539
+                    vin: '604676978'
+                  message: 'Vehicle retrieved.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      created_at: '2022-02-11T20:33:07.000000Z'
+                      updated_at: '2022-02-11T20:33:07.000000Z'
+                      type: used
+                      msrp: '51353.38'
+                      year: 2022
+                      make: Acura
+                      model: ILX
+                      miles: 9539
+                      vin: '604676978'
+                  message:
+                    type: string
+                    example: 'Vehicle retrieved.'
+      tags:
+        - Vehicles
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the vehicle.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/vehicles/{vehicle}':
+    put:
+      summary: 'Put a vehicle'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Vehicles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'The condition of the vehicle.'
+                  example: new
+                msrp:
+                  type: integer
+                  description: 'The MSRP of the vehicle.'
+                  example: 189000
+                make:
+                  type: string
+                  description: 'The make of the vehicle.'
+                  example: Honda
+                year:
+                  type: integer
+                  description: 'The year of the vehicle.'
+                  example: 2022
+                model:
+                  type: string
+                  description: 'The model of the vehicle.'
+                  example: Accord
+                miles:
+                  type: string
+                  description: 'The miles of the vehicle.'
+                  example: '20000'
+                vin:
+                  type: string
+                  description: 'The VIN of the vehicle.'
+                  example: 4Y1SL65848Z411439
+              required:
+                - type
+                - msrp
+                - make
+                - year
+                - model
+                - miles
+                - vin
+    patch:
+      summary: 'Patch a vehicle'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {ACCESS_TOKEN}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Vehicles
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                make:
+                  type: string
+                  description: 'The make of the vehicle.'
+                  example: Honda
+                year:
+                  type: integer
+                  description: 'The year of the vehicle.'
+                  example: 2022
+                model:
+                  type: string
+                  description: 'The model of the vehicle.'
+                  example: Accord
+                miles:
+                  type: string
+                  description: 'The miles of the vehicle.'
+                  example: '20000'
+                vin:
+                  type: string
+                  description: 'The VIN of the vehicle.'
+                  example: 4Y1SL65848Z411439
+                type:
+                  type: string
+                  description: 'The condition of the vehicle.'
+                  example: new
+                msrp:
+                  type: integer
+                  description: 'The MSRP of the vehicle.'
+                  example: 189000
+    parameters:
+      -
+        in: path
+        name: vehicle
+        description: ''
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Auth
+    description: "\nLogin or register for a new account to get your auth token"
+  -
+    name: Vehicles
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

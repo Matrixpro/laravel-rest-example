@@ -28,14 +28,14 @@ class VehiclesTableSeeder extends Seeder
 		
 		foreach ($vehicles_arr as $vehicle_arr) {
 			$vehicle = Vehicle::create([
-            'make' => $vehicle_arr['make'],
-            'year' => $vehicle_arr['year'],
-            'model' => $vehicle_arr['model'],
-            'type' => $faker->randomElement(['used','new']),
-            'msrp' => $faker->randomFloat(2, 0, 100000),
-            'miles' => $faker->randomNumber(),
-            'vin' => $faker->randomNumber(),
-        ]);
+	            'make' => $vehicle_arr['make'],
+	            'year' => $vehicle_arr['year'],
+	            'model' => $vehicle_arr['model'],
+	            'type' => $faker->randomElement(['used','new']),
+	            'msrp' => $faker->randomFloat(2, 0, 100000),
+	            'miles' => $faker->randomNumber(),
+	            'vin' => $faker->randomNumber(),
+        	]);
 		}
     }
 }

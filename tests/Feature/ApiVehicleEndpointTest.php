@@ -72,6 +72,7 @@ class ApiVehicleEndpointTest extends TestCase
      */
     public function test_user_can_create_a_vehicle()
     {
+        $this->withoutExceptionHandling();
         $user = User::first();
         
         // Login to get token

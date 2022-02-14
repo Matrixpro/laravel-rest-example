@@ -9,33 +9,33 @@ use App\Models\Vehicle;
 use Validator;
 use Illuminate\Contracts\Support\Jsonable;
 
+/**
+ * @group Vehicles
+ */
+
 class VehicleController extends BaseController
 {
 
     /**
-     * Gets multiple paginated/searchable vehicles
+     * List all vehicles
      * 
-     * Optional params are:
-     * 
-     * - cursor
-     * - per_page
-     * - search_for
-     * - search_in
-     * - order_by
-     * - order_direction
+     * @bodyParam per_page int Example: 10
+     * @bodyParam search_for string Search term. Example: Honda
+     * @bodyParam search_in string Options: type, msrp, make, year, model, miles, vin, created_at, updated_at Example: make
+     * @bodyParam order_direction string Options: ASC and DESC Example: ASC 
      *
      * @return     <JSON>  ( response )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $per_page = request('per_page', 10);
-        $cursor = request('cursor', NULL);
-        $search_for = request('search_for', NULL);
-        $search_in = request('search_in', NULL);
-        $order_by = request('order_by', 'id');
-        $order_direction = request('order_direction', 'ASC');
+        $params['per_page'] = request('per_page', 10);
+        $params['cursor'] = request('cursor', NULL);
+        $params['search_for'] = request('search_for', NULL);
+        $params['search_in'] = request('search_in', NULL);
+        $params['order_by'] = 'id'; // needs ID for cursore pagination
+        $params['order_direction'] = request('order_direction', 'ASC');
         
-        $paginator = Vehicle::orderBy($order_by, $order_direction);
+        $paginator = Vehicle::orderBy($params['order_by'], $params['order_direction']);
         
         switch (env('VEHICLE_CONDITION')) {
             case 'new':
@@ -46,15 +46,35 @@ class VehicleController extends BaseController
                 break;
         }
 
-        if (!is_null($search_for) && !is_null($search_in))
-            $paginator->where($search_in, 'LIKE', '%'.$search_for.'%');
+        if (!is_null($params['search_for']) && !is_null($params['search_in']))
+            $paginator->where($params['search_in'], 'LIKE', '%'.$params['search_for'].'%');
         
-        return $paginator->cursorPaginate($per_page, ['*'], 'cursor', $cursor);
+        $cols = [
+            'id',
+            'type',
+            'msrp',
+            'year',
+            'make',
+            'model',
+            'miles',
+            'vin',
+            'created_at',
+        ];
+        
+        return $paginator->cursorPaginate($params['per_page'], $cols, 'cursor', $params['cursor']);
     }
 
     
     /**
-     * Creates a Vehicle
+     * Create a vehicle
+     * 
+     * @bodyParam make string required The make of the vehicle. Example: Honda
+     * @bodyParam year int required The year of the vehicle. Example: 2022
+     * @bodyParam model string required The model of the vehicle. Example: Accord
+     * @bodyParam miles string required The miles of the vehicle. Example: 20000
+     * @bodyParam vin string required The VIN of the vehicle. Example: 4Y1SL65848Z411439
+     * @bodyParam type string required The condition of the vehicle. Example: new
+     * @bodyParam msrp numeric required The MSRP of the vehicle. Example: 189000.99
      *
      * @param      \Illuminate\Http\Request  $request  The request
      *
@@ -66,11 +86,11 @@ class VehicleController extends BaseController
         
         $validator = Validator::make($input, [
             'type' => 'required',
-            'msrp' => 'required',
+            'msrp' => 'required|numeric',
             'make' => 'required',
-            'year' => 'required',
+            'year' => 'required|int|digits:4',
             'model' => 'required',
-            'miles' => 'required',
+            'miles' => 'required|int',
             'vin' => 'required',
         ]);
         
@@ -85,7 +105,7 @@ class VehicleController extends BaseController
 
    
     /**
-     * Gets a Vehicle
+     * Get a vehicle
      *
      * @param      <int>  $id     The identifier
      *
@@ -104,7 +124,15 @@ class VehicleController extends BaseController
     
 
     /**
-     * Updates/Patches a Vehicle
+     * Patch a vehicle
+     * 
+     * @bodyParam make string The make of the vehicle. Example: Honda
+     * @bodyParam year int The year of the vehicle. Example: 2022
+     * @bodyParam model string The model of the vehicle. Example: Accord
+     * @bodyParam miles string The miles of the vehicle. Example: 20000
+     * @bodyParam vin string The VIN of the vehicle. Example: 4Y1SL65848Z411439
+     * @bodyParam type string The condition of the vehicle. Example: new
+     * @bodyParam msrp int The MSRP of the vehicle. Example: 189000.99
      *
      * @param      \Illuminate\Http\Request  $request  The request
      * @param      \App\Models\Vehicle       $vehicle  The vehicle
@@ -126,7 +154,15 @@ class VehicleController extends BaseController
     
 
     /**
-     * Updates/Puts a Vehicle
+     * Put a vehicle
+     * 
+     * @bodyParam make string required The make of the vehicle. Example: Honda
+     * @bodyParam year int required The year of the vehicle. Example: 2022
+     * @bodyParam model string required The model of the vehicle. Example: Accord
+     * @bodyParam miles string required The miles of the vehicle. Example: 20000
+     * @bodyParam vin string required The VIN of the vehicle. Example: 4Y1SL65848Z411439
+     * @bodyParam type string required The condition of the vehicle. Example: new
+     * @bodyParam msrp int required The MSRP of the vehicle. Example: 189000.99
      *
      * @param      \Illuminate\Http\Request  $request  The request
      * @param      \App\Models\Vehicle       $vehicle  The vehicle
@@ -160,9 +196,7 @@ class VehicleController extends BaseController
     }
    
     /**
-     * Destroys the given vehicle.
-     * 
-     * NOTE: Soft deletes.
+     * Delete a vehicle
      *
      * @param      \App\Models\Vehicle  $vehicle  The vehicle
      *
