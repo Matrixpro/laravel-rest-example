@@ -16,22 +16,21 @@ php artisan migrate
 php artisan db:seed
 composer test
 ```
-At this point, when running 'composer test', all tests should pass.
+<p>At this point, when running 'composer test', all tests should pass. Test user and test vehicles are seeded.</p>
 
-
-NOTES
------
-Test admin user is seeded with the following:
+Test user creds:
 ```
 Name: admin
 Email: admin@test.com
 Password: password
 ```
-- Visit /docs for API documentation
-- Test vehicles are seeded
+
+NOTES
+-----
+- Visit installation URL /docs for API documentation (for example: localhost/docs)
 - API auth via laravel's Sanctum: https://laravel.com/docs/9.x/sanctum 
 - Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting 
-- Refer to /tests/Feature for example usage
+- Refer to file system /tests/Feature for example usage
 - Edit .env 'VEHICLE_CONDITION' to restrict type: any/new/used
 - Use /api/register to create new user (will also provide bearer token)
 - Or use /api/login for existing user to get bearer token
