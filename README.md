@@ -29,9 +29,7 @@ NOTES
 -----
 - Visit installation URL /docs for API documentation (for example: localhost/docs)
 - API auth via laravel's Sanctum: https://laravel.com/docs/9.x/sanctum 
-- Soft deletes via laravel's eloquent: https://laravel.com/docs/9.x/eloquent#soft-deleting 
 - Refer to file system /tests/Feature for example usage
-- Edit .env 'VEHICLE_CONDITION' to restrict type: any/new/used
 - Use /api/register to create new user (will also provide bearer token)
 - Or use /api/login for existing user to get bearer token
 - CRUD Endpoints:
